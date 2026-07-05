@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Isotipo Kamara">
+  <g stroke="#17406B" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M10 46 a22 22 0 0 1 44 0"/>
+    <path d="M19 46 a13 13 0 0 1 26 0"/>
+    <path d="M27.5 46 a4.5 4.5 0 0 1 9 0"/>
+    <line x1="6" y1="46" x2="58" y2="46"/>
+  </g>
+</svg>
