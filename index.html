@@ -13,6 +13,7 @@
 <meta property="og:image" content="https://www.kamara.com.mx/img/hero-1.jpg">
 <link rel="canonical" href="https://www.kamara.com.mx/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%230A192E'/%3E%3Cg stroke='%23F6F8FB' stroke-width='3' fill='none' stroke-linecap='round'%3E%3Cpath d='M13 44 a19 19 0 0 1 38 0'/%3E%3Cpath d='M21 44 a11 11 0 0 1 22 0'/%3E%3Cpath d='M28 44 a4 4 0 0 1 8 0'/%3E%3Cline x1='9' y1='44' x2='55' y2='44'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preload" as="image" href="img/hero-1.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -95,11 +96,13 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 @media (max-width:760px){
   nav .wrap{height:auto;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
   .logo{letter-spacing:.24em;font-size:14px}
-  .nav-links{gap:14px;font-size:12.5px;flex-wrap:wrap}
-  .nav-links .btn{padding:7px 14px;font-size:12.5px}
+  .nav-links{gap:14px;font-size:13.5px;flex-wrap:wrap}
+  .nav-links a{padding:12px 4px}
+  .nav-links .btn{padding:12px 18px;font-size:13.5px}
 }
 
 .pagina{display:none}
+.pagina:focus{outline:none}
 .pagina.activa{display:block;animation:fundido .45s ease-out}
 @keyframes fundido{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.pagina.activa{animation:none}}
@@ -306,17 +309,17 @@ footer a:hover{color:#fff}
     <img class="hero-img" src="img/hero-2.jpg" width="1600" height="1200" alt="" role="presentation" loading="lazy" data-cap="Difusores de nogal fabricados a medida">
     <img class="hero-img" src="img/hero-4.jpg" width="1600" height="1200" alt="" role="presentation" loading="lazy" data-cap="Así se construye: cada detalle protegido hasta la entrega">
     <div class="hero-velo" aria-hidden="true"></div>
-    <div class="hero-meta" aria-hidden="true">
+    <div class="hero-meta">
       <div class="wrap">
         <span class="hero-cap" id="heroCap">Cine privado · butacas de piel y acústica a medida</span>
-        <span class="hero-dots" id="heroDots"></span>
+        <span class="hero-dots" id="heroDots" role="group" aria-label="Fotos del proyecto"></span>
       </div>
     </div>
     <div class="wrap hero-cont">
       <p class="eyebrow" style="color:var(--claro-sec)">Audio y video · Ciudad de México</p>
-      <h1>Sonido hi-fi en tu sala, <em>instalado y calibrado.</em></h1>
-      <p class="sub">Sistemas Canvas HiFi y Lyngdorf con instalación profesional incluida y calibración a la medida de tu espacio.</p>
-      <a class="btn" href="#/cotizar">Cotiza tu sistema</a>
+      <h1>Tu sala va a sonar <em>como un cine danés.</em></h1>
+      <p class="sub">Sistemas Canvas HiFi y Lyngdorf instalados y calibrados en un día. Desde $99,000 MXN con instalación incluida, precio cerrado, sin sorpresas.</p>
+      <a class="btn" href="#/cotizar">Cotizar mi sala →</a>
       <a class="btn-ghost" href="#/catalogo">Ver el catálogo</a>
       <div class="hero-linea" aria-hidden="true"></div>
       <div class="microprops">
@@ -543,7 +546,9 @@ footer a:hover{color:#fff}
           <p class="lead">Cuéntanos qué quieres lograr. Te respondemos el mismo día hábil.</p>
           <div class="chip-prod" id="chip"><span id="chip-txt"></span><button type="button" id="chip-x" aria-label="Quitar producto seleccionado">×</button></div>
         </div>
-        <form id="form-cotiza" novalidate>
+        <form id="form-cotiza" name="cotizacion" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="cotizacion">
+          <p style="position:absolute;left:-9999px" aria-hidden="true"><label>No llenar: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <div class="campo">
             <label for="f-nombre">Nombre</label>
             <input id="f-nombre" name="nombre" type="text" autocomplete="name" required>
@@ -583,7 +588,7 @@ footer a:hover{color:#fff}
       <div class="paga-linea">
         <div>
           <h3>¿Ya tienes tu cotización?</h3>
-          <p>Págala en línea de forma segura con tarjeta, Apple Pay o Link. Solo escribe el monto exacto de tu cotización.</p>
+          <p>Págala en línea de forma segura con tarjeta, Apple Pay o Link. Escribe el monto exacto y el <strong>folio de tu cotización</strong> en el pago. Al pagar aceptas los <a href="#/terminos" style="text-decoration:underline">términos de venta</a>.</p>
         </div>
         <a class="btn-ghost btn-stripe" href="https://buy.stripe.com/aFaeVdaHua6s4T65ks5Vu00" target="_blank" rel="noopener">Pagar mi cotización →</a>
       </div>
@@ -627,6 +632,47 @@ footer a:hover{color:#fff}
           <table class="specs"><tbody id="pd-specs"></tbody></table>
           <p class="nota-precios">Especificaciones del fabricante. La cotización Kamara incluye instalación y calibración.</p>
         </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ PÁGINA: TÉRMINOS DE VENTA ============ -->
+<main id="p-terminos" class="pagina">
+  <section>
+    <div class="wrap" style="max-width:800px">
+      <p class="eyebrow">Legal</p>
+      <h1 style="font-size:clamp(30px,4.5vw,48px);margin:14px 0 10px">Términos de venta <em style="font-style:italic;font-weight:400">y garantía.</em></h1>
+      <p style="color:#5B6B7E;margin-bottom:34px">Última actualización: julio de 2026</p>
+
+      <div style="display:grid;gap:26px;font-size:15.5px;line-height:1.75">
+        <div>
+          <h2 style="font-size:19px;margin-bottom:8px">1. Cotizaciones</h2>
+          <p>Toda venta parte de una cotización por escrito emitida por Kamara (LECOFIN, S.A. de C.V.) con folio único, precio cerrado en pesos mexicanos (IVA incluido) y alcance detallado: equipo, instalación y calibración. Las cotizaciones tienen una vigencia de 15 días naturales; pasado ese plazo, los precios pueden ajustarse por tipo de cambio o disponibilidad.</p>
+        </div>
+        <div>
+          <h2 style="font-size:19px;margin-bottom:8px">2. Pagos</h2>
+          <p>Los pagos se realizan conforme al esquema indicado en tu cotización. Los pagos en línea se procesan de forma segura a través de Stripe e <strong>invariablemente deben indicar el folio de la cotización</strong>; los pagos sin folio identificable podrán ser reembolsados para evitar errores de aplicación. Emitimos factura (CFDI) por todas nuestras ventas.</p>
+        </div>
+        <div>
+          <h2 style="font-size:19px;margin-bottom:8px">3. Entrega e instalación</h2>
+          <p>El tiempo de entrega e instalación se especifica en cada cotización y depende de la disponibilidad del equipo. La instalación y la calibración están incluidas en el precio cotizado y se realizan por personal de Kamara en CDMX y zona metropolitana. Si tu proyecto requiere obra, cableado especial u otros gremios, quedará indicado desde la cotización.</p>
+        </div>
+        <div>
+          <h2 style="font-size:19px;margin-bottom:8px">4. Garantías</h2>
+          <p>Los equipos cuentan con la garantía del fabricante (Canvas HiFi, Lyngdorf u otros según la marca), gestionada directamente por Kamara ante el distribuidor autorizado: tú no tienes que perseguir a nadie. La mano de obra de instalación tiene garantía de Kamara por 12 meses. La garantía no cubre daños por mal uso, variaciones eléctricas fuera de norma o intervención de terceros.</p>
+        </div>
+        <div>
+          <h2 style="font-size:19px;margin-bottom:8px">5. Cancelaciones y devoluciones</h2>
+          <p>Puedes cancelar sin costo antes de que el equipo sea pedido al fabricante o distribuidor. Después de ese punto, la cancelación puede generar cargos por gastos efectivamente incurridos, que se detallarán por escrito. Los equipos con pedido especial o de importación no son retornables salvo defecto de fábrica.</p>
+        </div>
+        <div>
+          <h2 style="font-size:19px;margin-bottom:8px">6. Contacto</h2>
+          <p>Para cualquier aclaración sobre estos términos escríbenos por <a id="wa-terminos" href="#" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a> o a <a href="mailto:hola@kamara.com.mx" style="text-decoration:underline">hola@kamara.com.mx</a>.</p>
+        </div>
+      </div>
+      <div style="margin-top:44px">
+        <a class="btn" href="#/cotizar">Cotiza tu sistema</a>
       </div>
     </div>
   </section>
@@ -685,7 +731,7 @@ footer a:hover{color:#fff}
   <div class="wrap">
     <img src="img/logo-kamara-blanco.svg" alt="Kamara" loading="lazy">
     <span>Integración de audio y video en CDMX · <a id="wa-footer" href="#" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:hola@kamara.com.mx">hola@kamara.com.mx</a> · <a href="https://buy.stripe.com/aFaeVdaHua6s4T65ks5Vu00" target="_blank" rel="noopener">Pagar en línea</a></span>
-    <span class="legal">© <span id="anio">2026</span> Kamara · Nombre comercial de LECOFIN, S.A. de C.V. Todos los derechos reservados. · <a href="#/privacidad" style="text-decoration:underline">Aviso de privacidad</a> · Precios sujetos a cotización por proyecto. Servicio en CDMX y área metropolitana.</span>
+    <span class="legal">© <span id="anio">2026</span> Kamara · Nombre comercial de LECOFIN, S.A. de C.V. Todos los derechos reservados. · <a href="#/privacidad" style="text-decoration:underline">Aviso de privacidad</a> · <a href="#/terminos" style="text-decoration:underline">Términos de venta</a> · Precios sujetos a cotización por proyecto. Servicio en CDMX y área metropolitana.</span>
   </div>
 </footer>
 
@@ -698,7 +744,7 @@ if(WA_NUMERO.indexOf("0000000") !== -1) console.warn("KAMARA: reemplaza WA_NUMER
 
 function waLink(txt){return "https://wa.me/" + WA_NUMERO + "?text=" + encodeURIComponent(txt);}
 function setWA(txt){
-  ["wa-form","wa-footer"].forEach(function(id){
+  ["wa-form","wa-footer","wa-terminos"].forEach(function(id){
     var el = document.getElementById(id);
     if(el) el.href = waLink(txt);
   });
@@ -992,7 +1038,7 @@ function renderProducto(id){
 }
 
 /* ============ ROUTER: cada sección es una página ============ */
-var RUTAS = ["inicio","catalogo","showroom","preguntas","cotizar","privacidad"];
+var RUTAS = ["inicio","catalogo","showroom","preguntas","cotizar","privacidad","terminos"];
 var PAGINAS = RUTAS.concat(["producto"]);
 var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 function navega(){
@@ -1007,6 +1053,10 @@ function navega(){
     a.classList.toggle("activa", a.dataset.ruta === (prod ? "catalogo" : r));
   });
   scrollTo(0, 0);
+  var pag = document.getElementById("p-" + r);
+  pag.setAttribute("tabindex", "-1");
+  pag.focus({preventScroll: true});
+  if(typeof heroRotador !== "undefined") heroRotador(r === "inicio");
   if(r === "showroom") contar();
   document.title = prod ? (PRODUCTOS[prod].nombre + " | Kamara") : ({
     inicio:   "Kamara — Alta fidelidad, instalada en tu casa | CDMX",
@@ -1014,13 +1064,15 @@ function navega(){
     showroom: "Showroom privado en Las Lomas | Kamara",
     preguntas:"Preguntas frecuentes | Kamara",
     cotizar:  "Pide tu cotización | Kamara",
-    privacidad: "Aviso de privacidad | Kamara"
+    privacidad: "Aviso de privacidad | Kamara",
+    terminos: "Términos de venta y garantía | Kamara"
   })[r];
 }
 addEventListener("hashchange", navega);
 navega();
 
 /* ============ HERO: rotador de fotos del proyecto ============ */
+var heroRotador;
 (function(){
   var fotos = document.querySelectorAll(".hero .hero-img");
   if(fotos.length < 2) return;
@@ -1039,6 +1091,7 @@ navega();
     fotos.forEach(function(f, i){
       f.classList.toggle("activa", i === idx);
       dots.children[i].classList.toggle("activa", i === idx);
+      dots.children[i].setAttribute("aria-current", i === idx ? "true" : "false");
     });
     cap.classList.add("cambia");
     setTimeout(function(){
@@ -1055,7 +1108,11 @@ navega();
     if(document.hidden){ if(timer) clearInterval(timer); timer = null; }
     else arranca();
   });
-  arranca();
+  heroRotador = function(activo){
+    if(activo) arranca();
+    else { if(timer) clearInterval(timer); timer = null; }
+  };
+  heroRotador(location.hash.replace(/^#\/?/, "") === "" || location.hash.indexOf("inicio") !== -1);
 })();
 
 /* Count-up de la página showroom */
@@ -1104,10 +1161,23 @@ document.getElementById("chip-x").addEventListener("click", function(){
 document.getElementById("form-cotiza").addEventListener("submit", function(ev){
   ev.preventDefault();
   var f = ev.target;
-  if(!f.nombre.value.trim() || !f.whatsapp.value.trim()){
-    (!f.nombre.value.trim() ? f.nombre : f.whatsapp).focus();
+  var falta = !f.nombre.value.trim() ? f.nombre : (!f.whatsapp.value.trim() ? f.whatsapp : null);
+  f.nombre.setAttribute("aria-invalid", !f.nombre.value.trim());
+  f.whatsapp.setAttribute("aria-invalid", !f.whatsapp.value.trim());
+  var g = document.getElementById("gracias");
+  if(falta){
+    g.innerHTML = "Falta tu " + (falta === f.nombre ? "nombre" : "WhatsApp") + " para poder responderte.";
+    g.style.display = "block";
+    g.style.background = "#FCEBEB"; g.style.color = "#A32D2D";
+    falta.focus();
     return;
   }
+  g.style.background = ""; g.style.color = "";
+  fetch("/", {
+    method: "POST",
+    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+    body: new URLSearchParams(new FormData(f)).toString()
+  }).catch(function(){});
   var msj = "Hola Kamara, quiero una cotización.\n" +
     "Nombre: " + f.nombre.value.trim() + "\n" +
     "WhatsApp: " + f.whatsapp.value.trim() +
@@ -1115,8 +1185,7 @@ document.getElementById("form-cotiza").addEventListener("submit", function(ev){
     (f.producto.value ? "\nProducto: " + f.producto.value : "") +
     (f.mensaje.value.trim() ? "\nEspacio: " + f.mensaje.value.trim() : "");
   window.open(waLink(msj), "_blank", "noopener");
-  var g = document.getElementById("gracias");
-  g.innerHTML = 'Listo. Se abrió WhatsApp con tu solicitud. Si no se abrió, <a href="' + waLink(msj) + '" target="_blank" rel="noopener" style="font-weight:600;text-decoration:underline">toca aquí para enviarla</a>.';
+  g.innerHTML = 'Listo, recibimos tu solicitud y se abrió WhatsApp. Si no se abrió, <a href="' + waLink(msj) + '" target="_blank" rel="noopener" style="font-weight:600;text-decoration:underline">toca aquí para enviarla</a>.';
   g.style.display = "block";
 });
 </script>
