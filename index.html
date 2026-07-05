@@ -218,6 +218,14 @@ section{padding:88px 0}
 #pd-feats li{padding:9px 0 9px 24px;position:relative;font-size:15px;border-bottom:1px solid var(--gris-linea)}
 #pd-feats li::before{content:"—";position:absolute;left:0;color:var(--acento)}
 .variantes{font-size:13.5px;color:var(--gris-texto);margin-top:16px}
+.pd-video{display:none;position:relative;width:100vw;margin:72px calc(50% - 50vw) 8px;background:var(--azul-noche)}
+.pd-video.activa{display:block}
+.pd-video video{display:block;width:100%;max-height:70vh;object-fit:cover}
+.pd-video .velo-v{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(10,25,46,.38) 0%,rgba(10,25,46,0) 18%,rgba(10,25,46,0) 80%,rgba(10,25,46,.5) 100%)}
+.pd-video .credito-v{position:absolute;left:22px;bottom:20px;font-size:12px;letter-spacing:.05em;color:rgba(255,255,255,.78)}
+.pd-video .sonido{position:absolute;right:22px;bottom:16px;font-size:13px;font-weight:600;color:#fff;background:rgba(10,25,46,.72);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:9px 18px;cursor:pointer;transition:background .25s}
+.pd-video .sonido:hover{background:rgba(10,25,46,.92)}
+@media (max-width:720px){.pd-video{margin-top:48px}.pd-video .credito-v{display:none}}
 .specs{width:100%;border-collapse:collapse;font-size:14px}
 .specs td{padding:10px 12px 10px 0;border-bottom:1px solid var(--gris-linea);vertical-align:top}
 .specs td:first-child{color:var(--gris-texto);width:42%}
@@ -619,6 +627,7 @@ footer a:hover{color:#fff}
           </div>
         </div>
       </div>
+      <div class="pd-video" id="pd-video"></div>
       <div class="prod-detalle">
         <div>
           <h2>Descripción</h2>
@@ -1035,6 +1044,26 @@ function renderProducto(id){
   });
   document.getElementById("pd-cotizar").onclick = function(){ precarga(p.cotiza); };
   document.getElementById("pd-wa").href = waLink("Hola Kamara, me interesa " + p.nombre + ". ¿Me pueden dar más información?");
+
+  var vz = document.getElementById("pd-video");
+  if(id === "canvas"){
+    vz.innerHTML = '<video muted autoplay loop playsinline preload="none" poster="img/canvas-poster.jpg" width="1280" height="720" aria-label="Video del sistema Canvas HiFi en uso"><source src="img/canvas-video.mp4" type="video/mp4"></video>' +
+      '<div class="velo-v" aria-hidden="true"></div>' +
+      '<span class="credito-v">Canvas HiFi en acción · video del fabricante</span>' +
+      '<button type="button" class="sonido" id="pd-sonido">Escuchar con sonido</button>';
+    vz.classList.add("activa");
+    var vd = vz.querySelector("video");
+    vd.muted = true;
+    if(vd.play) vd.play().catch(function(){});
+    document.getElementById("pd-sonido").onclick = function(){
+      vd.muted = !vd.muted;
+      if(!vd.muted && vd.paused) vd.play().catch(function(){});
+      this.textContent = vd.muted ? "Escuchar con sonido" : "Silenciar";
+    };
+  } else {
+    vz.innerHTML = "";
+    vz.classList.remove("activa");
+  }
 }
 
 /* ============ ROUTER: cada sección es una página ============ */
