@@ -1045,11 +1045,16 @@ function renderProducto(id){
   document.getElementById("pd-cotizar").onclick = function(){ precarga(p.cotiza); };
   document.getElementById("pd-wa").href = waLink("Hola Kamara, me interesa " + p.nombre + ". ¿Me pueden dar más información?");
 
+  var VIDEOS = {
+    canvas: {src: "img/canvas-video.mp4", poster: "img/canvas-poster.jpg", credito: "Canvas HiFi en acción · video del fabricante", aria: "Video del sistema Canvas HiFi en uso"},
+    fr2: {src: "img/fr2-video.mp4", poster: "img/fr2-poster.jpg", credito: "Lyngdorf FR-2 en acción · video del fabricante", aria: "Video de la bocina Lyngdorf FR-2 en uso"}
+  };
   var vz = document.getElementById("pd-video");
-  if(id === "canvas"){
-    vz.innerHTML = '<video muted autoplay loop playsinline preload="none" poster="img/canvas-poster.jpg" width="1280" height="720" aria-label="Video del sistema Canvas HiFi en uso"><source src="img/canvas-video.mp4" type="video/mp4"></video>' +
+  var vc = VIDEOS[id];
+  if(vc){
+    vz.innerHTML = '<video muted autoplay loop playsinline preload="none" poster="' + vc.poster + '" width="1280" height="720" aria-label="' + vc.aria + '"><source src="' + vc.src + '" type="video/mp4"></video>' +
       '<div class="velo-v" aria-hidden="true"></div>' +
-      '<span class="credito-v">Canvas HiFi en acción · video del fabricante</span>' +
+      '<span class="credito-v">' + vc.credito + '</span>' +
       '<button type="button" class="sonido" id="pd-sonido">Escuchar con sonido</button>';
     vz.classList.add("activa");
     var vd = vz.querySelector("video");
