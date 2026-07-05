@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 64" role="img" aria-label="Kamara">
+  <g stroke="#17406B" stroke-width="2.6" fill="none" stroke-linecap="round">
+    <path d="M12 44 a20 20 0 0 1 40 0"/>
+    <path d="M20 44 a12 12 0 0 1 24 0"/>
+    <path d="M28 44 a4 4 0 0 1 8 0"/>
+    <line x1="7" y1="44" x2="57" y2="44"/>
+  </g>
+  <text x="74" y="40" font-family="Inter,'Helvetica Neue',Arial,sans-serif" font-size="22" font-weight="600" letter-spacing="7.5" fill="#0A192E">KAMARA</text>
+  <text x="75" y="55" font-family="Inter,'Helvetica Neue',Arial,sans-serif" font-size="8.5" letter-spacing="3.55" fill="#5D6B7E">AUDIO Y VIDEO · CDMX</text>
+</svg>
