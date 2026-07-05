@@ -332,9 +332,9 @@ footer a:hover{color:#fff}
     </div>
     <div class="wrap hero-cont">
       <p class="eyebrow" style="color:var(--claro-sec)">Audio y video · Ciudad de México</p>
-      <h1>Tu sala va a sonar <em>como un cine danés.</em></h1>
-      <p class="sub">Sistemas Canvas HiFi y Lyngdorf instalados y calibrados en un día. Desde $99,000 MXN con instalación incluida, precio cerrado, sin sorpresas.</p>
-      <a class="btn" href="#/cotizar">Cotizar mi sala →</a>
+      <h1>Hay canciones que aún no escuchas <em>completas.</em></h1>
+      <p class="sub">Canvas HiFi y Lyngdorf, calibrados a la acústica exacta de tu sala. Instalación incluida; los cables, invisibles.</p>
+      <a class="btn" href="#/cotizar">Quiero escucharlas</a>
       <a class="btn-ghost" href="#/catalogo">Ver el catálogo</a>
       <div class="hero-linea" aria-hidden="true"></div>
       <div class="microprops">
@@ -603,9 +603,9 @@ footer a:hover{color:#fff}
       <div class="paga-linea">
         <div>
           <h3>¿Ya tienes tu cotización?</h3>
-          <p>Págala en línea de forma segura con tarjeta, Apple Pay o Link. Escribe el monto exacto y el <strong>folio de tu cotización</strong> en el pago. Al pagar aceptas los <a href="#/terminos" style="text-decoration:underline">términos de venta</a>.</p>
+          <p>Solicítanos tu enlace de pago seguro (Stripe): se genera con el monto exacto y el folio de tu cotización, para que pagues con tarjeta, Apple Pay o Link sin errores. Al pagar aceptas los <a href="#/terminos" style="text-decoration:underline">términos de venta</a>.</p>
         </div>
-        <a class="btn-ghost btn-stripe" href="https://buy.stripe.com/aFaeVdaHua6s4T65ks5Vu00" target="_blank" rel="noopener">Pagar mi cotización →</a>
+        <a class="btn-ghost btn-stripe" id="wa-pago" href="#" target="_blank" rel="noopener">Pedir mi enlace de pago →</a>
       </div>
     </div>
   </section>
@@ -668,11 +668,11 @@ footer a:hover{color:#fff}
         </div>
         <div>
           <h2 style="font-size:19px;margin-bottom:8px">2. Pagos</h2>
-          <p>Los pagos se realizan conforme al esquema indicado en tu cotización. Los pagos en línea se procesan de forma segura a través de Stripe e <strong>invariablemente deben indicar el folio de la cotización</strong>; los pagos sin folio identificable podrán ser reembolsados para evitar errores de aplicación. Emitimos factura (CFDI) por todas nuestras ventas.</p>
+          <p>Los pagos se realizan conforme al esquema indicado en tu cotización. Los pagos en línea se procesan de forma segura a través de Stripe mediante un <strong>enlace de pago individual generado con el folio y el monto exacto de tu cotización</strong>; no aceptes ni utilices enlaces de pago que no te hayamos enviado directamente. Los pagos no identificables podrán ser reembolsados para evitar errores de aplicación. Emitimos factura (CFDI) por todas nuestras ventas.</p>
         </div>
         <div>
           <h2 style="font-size:19px;margin-bottom:8px">3. Entrega e instalación</h2>
-          <p>El tiempo de entrega e instalación se especifica en cada cotización y depende de la disponibilidad del equipo. La instalación y la calibración están incluidas en el precio cotizado y se realizan por personal de Kamara en CDMX y zona metropolitana. Si tu proyecto requiere obra, cableado especial u otros gremios, quedará indicado desde la cotización.</p>
+          <p>El tiempo de entrega e instalación se especifica en cada cotización y depende de la disponibilidad del equipo. La instalación y la calibración están incluidas en el precio cotizado y se realizan por personal de Kamara en CDMX y zona metropolitana. La instalación "en un día" aplica a proyectos sin obra civil ni cableado especial, conforme al alcance detallado en tu cotización; si tu proyecto requiere obra u otros gremios, quedará indicado desde la cotización. Los programas de prueba en casa ofrecidos por los fabricantes (por ejemplo, los 45 días de Canvas HiFi) se sujetan a los términos y condiciones del fabricante, incluyendo las condiciones de devolución del equipo.</p>
         </div>
         <div>
           <h2 style="font-size:19px;margin-bottom:8px">4. Garantías</h2>
@@ -746,7 +746,7 @@ footer a:hover{color:#fff}
 <footer>
   <div class="wrap">
     <img src="img/logo-kamara-blanco.svg" alt="Kamara" loading="lazy">
-    <span>Integración de audio y video en CDMX · <a id="wa-footer" href="#" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:hola@kamara.com.mx">hola@kamara.com.mx</a> · <a href="https://buy.stripe.com/aFaeVdaHua6s4T65ks5Vu00" target="_blank" rel="noopener">Pagar en línea</a></span>
+    <span>Integración de audio y video en CDMX · <a id="wa-footer" href="#" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:hola@kamara.com.mx">hola@kamara.com.mx</a></span>
     <span class="legal">© <span id="anio">2026</span> Kamara · Nombre comercial de LECOFIN, S.A. de C.V. Todos los derechos reservados. · <a href="#/privacidad" style="text-decoration:underline">Aviso de privacidad</a> · <a href="#/terminos" style="text-decoration:underline">Términos de venta</a> · Precios sujetos a cotización por proyecto. Servicio en CDMX y área metropolitana.</span>
   </div>
 </footer>
@@ -766,6 +766,8 @@ function setWA(txt){
   });
 }
 setWA(WA_BASE);
+var waPago = document.getElementById("wa-pago");
+if(waPago) waPago.href = waLink("Hola Kamara, quiero pagar mi cotización. Mi folio es: ");
 document.getElementById("anio").textContent = new Date().getFullYear();
 
 
