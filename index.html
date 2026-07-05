@@ -120,6 +120,10 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 @keyframes kenburns{from{transform:scale(1.04)}to{transform:scale(1.13)}}
 @media (prefers-reduced-motion:reduce){.hero-img{transition:none}.hero-img.activa{animation:none;transform:none}}
 .hero-velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,25,46,.55) 0%,rgba(10,25,46,.55) 40%,rgba(10,25,46,.94) 100%)}
+.hero .eyebrow,.hero h1,.hero .sub{transition:opacity .9s ease}
+.hero.marca .eyebrow,.hero.marca h1,.hero.marca .sub{opacity:0}
+.hero.marca .hero-img.activa{opacity:.92;animation:none;transform:none}
+.hero.marca .hero-velo{background:linear-gradient(180deg,rgba(10,25,46,.15) 0%,rgba(10,25,46,0) 45%,rgba(10,25,46,.72) 100%)}
 .hero-meta{position:absolute;right:0;left:0;top:84px;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:16px;pointer-events:none}
 .hero-meta .wrap{display:flex;justify-content:space-between;align-items:center;width:100%;gap:16px}
 .hero-cap{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--claro-sec);opacity:.9;transition:opacity .6s ease}
@@ -319,7 +323,7 @@ footer a:hover{color:#fff}
 
 <!-- ============ PÁGINA: INICIO ============ -->
 <main id="p-inicio" class="pagina">
-  <header class="hero">
+  <header class="hero marca">
     <img class="hero-img activa" src="img/hero-0.jpg" width="1733" height="907" alt="Kamara: bocina Lyngdorf FR-2 y sistema Canvas HiFi en una sala de diseño" fetchpriority="high" data-cap="Lyngdorf y Canvas HiFi · audio, video y diseño">
     <img class="hero-img" src="img/hero-1.jpg" width="1448" height="1086" alt="" role="presentation" loading="lazy" data-cap="Cine privado · butacas de piel y acústica a medida">
     <img class="hero-img" src="img/hero-2.jpg" width="1600" height="1200" alt="" role="presentation" loading="lazy" data-cap="Difusores de nogal fabricados a medida">
@@ -1130,6 +1134,7 @@ var heroRotador;
   });
   function muestra(n){
     idx = n % fotos.length;
+    document.querySelector(".hero").classList.toggle("marca", idx === 0);
     fotos.forEach(function(f, i){
       f.classList.toggle("activa", i === idx);
       dots.children[i].classList.toggle("activa", i === idx);
