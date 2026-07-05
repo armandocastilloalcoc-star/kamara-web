@@ -125,6 +125,11 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .hero-linea{height:1px;background:var(--linea-oscura);margin:44px 0 20px}
 .microprops{display:flex;gap:28px;flex-wrap:wrap;font-size:13px;color:var(--claro-sec);letter-spacing:.04em}
 
+.paga-linea{margin-top:64px;padding:30px 34px;border:1px solid var(--gris-linea);background:var(--blanco);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.paga-linea h3{font-size:20px;margin-bottom:6px}
+.paga-linea p{color:#5B6B7E;font-size:14.5px;max-width:52ch}
+.btn-stripe{white-space:nowrap}
+
 .confianza{background:var(--blanco);border-bottom:1px solid var(--gris-linea)}
 .confianza .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0}
 .confianza .wrap>div{padding:20px 12px;text-align:center;font-size:13.5px;font-weight:500;color:var(--azul-marca);border-left:1px solid var(--gris-linea)}
@@ -573,6 +578,14 @@ footer a:hover{color:#fff}
           <span class="alt-wa">¿Prefieres hablar? <a id="wa-form" href="#" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></span>
         </form>
       </div>
+
+      <div class="paga-linea">
+        <div>
+          <h3>¿Ya tienes tu cotización?</h3>
+          <p>Págala en línea de forma segura con tarjeta, Apple Pay o Link. Solo escribe el monto exacto de tu cotización.</p>
+        </div>
+        <a class="btn-ghost btn-stripe" href="https://buy.stripe.com/aFaeVdaHua6s4T65ks5Vu00" target="_blank" rel="noopener">Pagar mi cotización →</a>
+      </div>
     </div>
   </section>
 </main>
@@ -670,7 +683,7 @@ footer a:hover{color:#fff}
 <footer>
   <div class="wrap">
     <img src="img/logo-kamara-blanco.svg" alt="Kamara" loading="lazy">
-    <span>Integración de audio y video en CDMX · <a id="wa-footer" href="#" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:hola@kamara.com.mx">hola@kamara.com.mx</a></span>
+    <span>Integración de audio y video en CDMX · <a id="wa-footer" href="#" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:hola@kamara.com.mx">hola@kamara.com.mx</a> · <a href="https://buy.stripe.com/aFaeVdaHua6s4T65ks5Vu00" target="_blank" rel="noopener">Pagar en línea</a></span>
     <span class="legal">© <span id="anio">2026</span> Kamara · Nombre comercial de LECOFIN, S.A. de C.V. Todos los derechos reservados. · <a href="#/privacidad" style="text-decoration:underline">Aviso de privacidad</a> · Precios sujetos a cotización por proyecto. Servicio en CDMX y área metropolitana.</span>
   </div>
 </footer>
