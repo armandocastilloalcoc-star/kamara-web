@@ -172,24 +172,13 @@ section{padding:88px 0}
 .manifiesto .credito{position:absolute;right:24px;bottom:14px;font-size:11.5px;letter-spacing:.08em;color:var(--claro-sec);opacity:.85}
 @media (max-width:720px){.manifiesto .velo{background:linear-gradient(180deg,rgba(10,25,46,.9),rgba(10,25,46,.6))}}
 
-/* Film: Primera Voz */
+/* Film: sección cinematográfica */
 .filmkam{background:var(--azul-noche);padding:96px 0 100px}
-.filmkam h2{color:#fff;font-size:clamp(30px,4.4vw,52px);max-width:18ch}
+.filmkam h2{color:#fff;font-size:clamp(30px,4.4vw,52px);max-width:18ch;margin-bottom:36px}
 .filmkam h2 em{font-style:italic}
-.filmkam .film-sub{margin:18px 0 34px;color:var(--claro-sec);max-width:52ch;font-size:17px}
 .film-cine{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#04070D}
-.film-cine .film-poster,.film-cine .film-teaser{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.film-play{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:12px;min-height:48px;padding:12px 26px;border-radius:999px;border:1px solid rgba(255,255,255,.55);background:rgba(10,25,46,.62);color:#fff;font-family:var(--fs);font-size:15px;font-weight:600;cursor:pointer;transition:background .25s}
-.film-play:hover,.film-play:focus-visible{background:rgba(37,99,235,.85)}
-.film-play .tri{width:0;height:0;border-left:11px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent}
-.film-modal{border:none;padding:0;background:transparent;width:min(1100px,94vw)}
-.film-modal::backdrop{background:rgba(4,8,16,.93)}
-.film-modal video{width:100%;aspect-ratio:16/9;background:#000;border-radius:8px;display:block}
-.film-cierra{position:absolute;top:-52px;right:0;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:22px;line-height:1;cursor:pointer}
-.film-cta{display:block;text-align:center;margin-top:16px;color:#fff;font-size:16px;padding:12px;text-decoration:none;border:1px solid rgba(255,255,255,.35);border-radius:8px;transition:background .25s,border-color .25s}
-.film-cta:hover,.film-cta:focus-visible,.film-cta.brilla{background:var(--acento);border-color:var(--acento)}
-@media (prefers-reduced-motion:reduce){.film-play,.film-cta{transition:none}}
-@media (max-width:720px){.filmkam{padding:70px 0 76px}.film-play{font-size:14px;padding:11px 20px;bottom:16px}}
+.film-cine .film-poster,.film-cine video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (max-width:720px){.filmkam{padding:70px 0 76px}}
 
 .atajos{background:var(--gris-fondo);border-top:1px solid var(--gris-linea)}
 .atajos .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
@@ -402,21 +391,12 @@ footer a:hover{color:#fff}
 
   <section class="filmkam oscura">
     <div class="wrap">
-      <div class="num-seccion"><span>Primera voz</span><i></i></div>
       <h2>Antes de escuchar, <em>ya sentías.</em></h2>
-      <p class="film-sub">Un film de 54 segundos sobre el primer sonido que recuerdas — y la sala que te lo devuelve.</p>
       <div class="film-cine" id="filmCine">
-        <img class="film-poster" src="img/film-poster.jpg" width="1280" height="720" alt="Fotograma del film Primera Voz: el woofer de una bocina Lyngdorf FR-2 en primer plano" loading="lazy">
-        <button class="film-play" id="filmPlay" aria-label="Ver el film completo con sonido, dura 54 segundos"><span class="tri" aria-hidden="true"></span>Ver con sonido · 54 s</button>
+        <img class="film-poster" src="img/film-poster.jpg" width="1280" height="720" alt="Fotograma del film de Kamara: el woofer de una bocina Lyngdorf FR-2 en primer plano" loading="lazy">
       </div>
     </div>
   </section>
-
-  <dialog class="film-modal" id="filmModal" aria-label="Film: Kamara — Primera Voz">
-    <button class="film-cierra" id="filmCierra" aria-label="Cerrar el film">×</button>
-    <video id="filmFull" controls playsinline preload="none" poster="img/film-poster.jpg" aria-label="Kamara — Primera Voz. 54 segundos. Música instrumental, sin diálogos."></video>
-    <a class="film-cta" id="filmCta" href="#/cotizar">Escúchalo en tu propia sala →</a>
-  </dialog>
 
   <section class="atajos">
     <div class="wrap">
@@ -1223,58 +1203,51 @@ var heroRotador;
   heroRotador(location.hash.replace(/^#\/?/, "") === "" || location.hash.indexOf("inicio") !== -1);
 })();
 
-/* ============ FILM: Primera Voz ============ */
+/* ============ FILM: autoplay con sonido al llegar ============ */
 var filmKam;
 (function(){
   var caja = document.getElementById("filmCine");
-  var modal = document.getElementById("filmModal");
-  if(!caja || !modal || !modal.showModal) return;
-  var full = document.getElementById("filmFull");
-  var abre = document.getElementById("filmPlay");
-  var cta = document.getElementById("filmCta");
-  var teaser = null, cargado = false, invocador = null;
+  if(!caja) return;
+  var video = null, conSonido = false;
 
-  function inyecta(){
-    if(cargado || reduce) return; cargado = true;
-    teaser = document.createElement("video");
-    teaser.muted = true; teaser.loop = true; teaser.autoplay = true;
-    teaser.setAttribute("playsinline", "");
-    teaser.setAttribute("preload", "none");
-    teaser.setAttribute("aria-hidden", "true");
-    teaser.className = "film-teaser";
-    teaser.innerHTML = '<source src="img/film-teaser.mp4" type="video/mp4">';
-    caja.insertBefore(teaser, abre);
-    teaser.play().catch(function(){});
+  function crea(){
+    if(video) return;
+    video = document.createElement("video");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("preload", "metadata");
+    video.setAttribute("poster", "img/film-poster.jpg");
+    video.setAttribute("aria-label", "Film de Kamara. Música instrumental, sin diálogos.");
+    video.controls = true;
+    video.src = "img/primera-voz.mp4";
+    caja.appendChild(video);
+  }
+  function intenta(){
+    crea();
+    if(reduce || video.ended) return;
+    video.muted = false;
+    video.play().then(function(){ conSonido = true; }).catch(function(){
+      video.muted = true;
+      video.play().catch(function(){});
+      var des = function(){
+        if(video && !conSonido){ video.muted = false; conSonido = true; }
+        document.removeEventListener("pointerdown", des);
+        document.removeEventListener("keydown", des);
+      };
+      document.addEventListener("pointerdown", des);
+      document.addEventListener("keydown", des);
+    });
   }
   if("IntersectionObserver" in window){
     var obs = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ inyecta(); obs.disconnect(); } });
-    }, {rootMargin: "250px"});
+      es.forEach(function(e){
+        if(e.isIntersecting) intenta();
+        else if(video) video.pause();
+      });
+    }, {threshold: 0.35});
     obs.observe(caja);
-  } else { inyecta(); }
+  } else { crea(); }
 
-  abre.onclick = function(){
-    invocador = document.activeElement;
-    if(!full.getAttribute("src")) full.setAttribute("src", "img/primera-voz.mp4");
-    if(teaser) teaser.pause();
-    modal.showModal();
-    full.play().catch(function(){});
-  };
-  document.getElementById("filmCierra").onclick = function(){ modal.close(); };
-  cta.onclick = function(){ modal.close(); };
-  modal.addEventListener("click", function(e){ if(e.target === modal) modal.close(); });
-  modal.addEventListener("close", function(){
-    full.pause(); full.removeAttribute("src"); full.load();
-    if(teaser && !reduce) teaser.play().catch(function(){});
-    if(invocador && invocador.focus) invocador.focus();
-  });
-  full.addEventListener("ended", function(){ cta.classList.add("brilla"); cta.focus(); });
-
-  filmKam = function(activo){
-    if(!teaser) return;
-    if(activo && !reduce) teaser.play().catch(function(){});
-    else teaser.pause();
-  };
+  filmKam = function(activo){ if(video && !activo) video.pause(); };
 })();
 
 /* Count-up de la página Proyectos */
