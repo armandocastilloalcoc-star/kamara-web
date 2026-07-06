@@ -131,8 +131,6 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .hero.marca .eyebrow,.hero.marca h1,.hero.marca .sub{opacity:0}
 .hero.marca .hero-img.activa{opacity:.92;animation:none;transform:none}
 .hero.marca .hero-velo{background:linear-gradient(180deg,rgba(10,25,46,.15) 0%,rgba(10,25,46,0) 45%,rgba(10,25,46,.72) 100%)}
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease}
-.hero-video.lista{opacity:.92}
 .hero-meta{position:absolute;right:0;left:0;top:84px;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:16px;pointer-events:none}
 .hero-meta .wrap{display:flex;justify-content:space-between;align-items:center;width:100%;gap:16px}
 .hero-cap{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--claro-sec);opacity:.9;transition:opacity .6s ease}
@@ -1141,7 +1139,6 @@ function navega(){
   pag.focus({preventScroll: true});
   if(typeof heroRotador !== "undefined") heroRotador(r === "inicio");
   if(typeof filmKam === "function") filmKam(r === "inicio");
-  if(typeof heroAnim === "function") heroAnim(r === "inicio");
   if(r === "proyectos") contar();
   document.title = prod ? (PRODUCTOS[prod].nombre + " | Kamara") : ({
     inicio:   "Kamara — Alta fidelidad, instalada en tu casa | CDMX",
@@ -1199,38 +1196,6 @@ var heroRotador;
     else { if(timer) clearInterval(timer); timer = null; }
   };
   heroRotador(location.hash.replace(/^#\/?/, "") === "" || location.hash.indexOf("inicio") !== -1);
-})();
-
-/* ============ HERO: render animado ============ */
-var heroAnim;
-(function(){
-  var hero = document.querySelector(".hero");
-  var foto = document.querySelector(".hero .hero-img");
-  if(!hero || !foto || reduce) return;
-  var v = null;
-  function inyecta(){
-    if(v) return;
-    v = document.createElement("video");
-    v.muted = true; v.loop = true; v.autoplay = true;
-    v.setAttribute("playsinline", "");
-    v.setAttribute("preload", "none");
-    v.setAttribute("aria-hidden", "true");
-    v.className = "hero-video";
-    v.innerHTML = '<source src="img/hero-anim.mp4" type="video/mp4">';
-    v.addEventListener("playing", function(){ v.classList.add("lista"); });
-    foto.parentNode.insertBefore(v, foto.nextSibling);
-    v.play().catch(function(){});
-  }
-  if(document.readyState === "complete") setTimeout(inyecta, 600);
-  else addEventListener("load", function(){ setTimeout(inyecta, 600); });
-  document.addEventListener("visibilitychange", function(){
-    if(!v) return;
-    if(document.hidden) v.pause(); else v.play().catch(function(){});
-  });
-  heroAnim = function(activo){
-    if(!v) return;
-    if(activo) v.play().catch(function(){}); else v.pause();
-  };
 })();
 
 /* ============ FILM: autoplay con sonido al llegar ============ */
