@@ -1,0 +1,4 @@
+# Sitio estático de Kamara — publica esta misma carpeta, sin build
+[build]
+  publish = "."
+  command = ""
