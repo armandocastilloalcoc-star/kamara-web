@@ -44,8 +44,7 @@ gtag('js', new Date());
 gtag('config', 'G-VM0LE48DQF', {'anonymize_ip': true});
 </script>
 <!-- LCP = still del hero en AVIF (47 KB), precargado con máxima prioridad -->
-<link rel="preload" as="image" href="img/hero-0.jpg" fetchpriority="high" media="(min-width:721px)">
-<link rel="preload" as="image" href="img/hero-1.jpg" fetchpriority="high" media="(max-width:720px)">
+<link rel="preload" as="image" href="img/hero-0.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Fraunces con eje ital (itálica real) + Hanken Grotesk (UI) + IBM Plex Mono (placa técnica, solo 400) -->
@@ -678,11 +677,15 @@ html,body{overflow-x:clip}
   .hero-img.activa{animation:none;transform:none}
   .manifiesto .velo{background:linear-gradient(180deg,rgba(5,9,15,.8),rgba(10,25,46,.4))}
   .manifiesto .fondo{filter:saturate(.9) brightness(1.15)}
-  .hero.marca .eyebrow,.js .hero.marca h1,.js .hero.marca .sub{opacity:1 !important}
-  .hero.marca .hero-velo{background:linear-gradient(180deg,rgba(10,25,46,.45) 0%,rgba(10,25,46,.3) 40%,rgba(5,9,15,.88) 100%)}
-  .hero-img{object-position:62% center}
+  .hero.marca .eyebrow,.hero.marca h1,.hero.marca .sub{display:none}
+  .hero{min-height:auto;display:block}
+  .hero picture{display:block}
+  .hero-img{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:1733/907}
+  .hero.marca .hero-img.activa{opacity:1}
+  .hero-velo{display:none}
   .hero-meta{display:none}
-  .hero h1{font-size:clamp(2.1rem,9vw,2.9rem)}
+  .hero-cont{padding:26px 0 44px}
+  .hero h1{font-size:clamp(2rem,8.5vw,2.6rem)}
 }
 
 /* ───────── prefers-reduced-motion: apagado total ───────── */
@@ -722,7 +725,6 @@ html,body{overflow-x:clip}
 <main id="p-inicio" class="pagina">
   <header class="hero marca">
     <picture>
-      <source media="(max-width:720px)" srcset="img/hero-1.jpg">
       <img class="hero-img activa" src="img/hero-0.jpg" width="1733" height="907" alt="Kamara: bocina Lyngdorf FR-2 y sistema Canvas HiFi en una sala de diseño" fetchpriority="high" decoding="async" data-cap="Lyngdorf y Canvas HiFi · audio, video y diseño">
     </picture>
     <div class="hero-velo" aria-hidden="true"></div>
